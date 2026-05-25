@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OpenAI Codex 완전 정복 — 생초보 가이드 2026</title>
+    <meta name="description" content="Codex를 처음 쓰는 사람을 위한 한국어 A to Z 입문 강의형 가이드. 2026년 5월 25일 OpenAI 공식 문서 기준." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="glow-bg-container" aria-hidden="true">
+      <div class="glow-orb orb-1"></div>
+      <div class="glow-orb orb-2"></div>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Codex101 홈">
+        <span class="brand-mark"></span>
+        <span class="brand-name">Codex101</span>
+        <span class="brand-sub">Codex 한국어 가이드</span>
+      </a>
+      <div class="top-actions">
+        <a class="ghost-button" href="https://chatgpt.com/codex" target="_blank" rel="noreferrer">Codex 열기</a>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="테마 전환" title="테마 전환">
+          <span class="sun"></span>
+        </button>
+        <button class="menu-button" id="menuToggle" type="button" aria-label="목차 열기">목차</button>
+      </div>
+    </header>
+
+    <aside class="sidebar" id="sidebar" aria-label="문서 목차">
+      <div class="sidebar-inner">
+        <div class="side-group">
+          <p class="side-label">기초 필수</p>
+          <a href="#00-before"><span>00</span> 시작하기 전에 <b>NEW</b></a>
+          <a href="#01-what"><span>01</span> Codex란?</a>
+          <a href="#02-surfaces"><span>02</span> 사용 방식</a>
+          <a href="#03-pricing"><span>03</span> 요금과 접근</a>
+          <a href="#04-install"><span>04</span> 설치와 로그인 <b>핵심</b></a>
+          <a href="#05-first-run"><span>05</span> 첫 실행</a>
+          <a href="#06-prompting"><span>06</span> 프롬프트 기본기</a>
+          <a href="#07-practice"><span>07</span> 첫 실습</a>
+          <a href="#08-plan"><span>08</span> Plan Mode</a>
+          <a href="#09-agents"><span>09</span> AGENTS.md <b>필수</b></a>
+          <a href="#10-permissions"><span>10</span> 권한과 샌드박스</a>
+          <a href="#11-cli"><span>11</span> CLI 명령어</a>
+        </div>
+        <div class="side-group">
+          <p class="side-label">실전 확장</p>
+          <a href="#12-models"><span>12</span> 모델 선택</a>
+          <a href="#13-git"><span>13</span> Git 워크플로우</a>
+          <a href="#14-cloud"><span>14</span> Codex Cloud</a>
+          <a href="#15-github"><span>15</span> GitHub 리뷰</a>
+          <a href="#16-mcp"><span>16</span> MCP</a>
+          <a href="#17-skills"><span>17</span> Skills</a>
+          <a href="#18-automations"><span>18</span> 자동화</a>
+          <a href="#19-windows"><span>19</span> Windows</a>
+          <a href="#20-trouble"><span>20</span> 문제 해결</a>
+          <a href="#21-mistakes"><span>21</span> 흔한 실수</a>
+          <a href="#22-security"><span>22</span> 보안 수칙 <b>필수</b></a>
+          <a href="#23-routine"><span>23</span> 첫날 루틴</a>
+          <a href="#24-sources"><span>24</span> 공식 출처</a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="progress" id="progress"></div>
+
+    <main class="content" id="top">
+      <section class="hero section-block">
+        <div class="hero-copy">
+          <p class="eyebrow">2026년 5월 25일 OpenAI 공식 문서 기준</p>
+          <h1>Codex를 처음 켜는 사람을 위한 A to Z 가이드</h1>
+          <p class="hero-lead">
+            설치, 첫 작업, 프롬프트, AGENTS.md, 권한, Git, Cloud, GitHub 리뷰,
+            MCP, Skills, 자동화까지 한 번에 따라가는 입문 강의형 문서입니다.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#04-install">설치부터 보기</a>
+            <a class="secondary-button" href="#05-first-run">첫 실행 바로 보기</a>
+          </div>
+        </div>
+        <div class="terminal-visual" aria-label="Codex 작업 흐름 미리보기">
+          <div class="terminal-bar"><span></span><span></span><span></span></div>
+          <div class="terminal-line prompt">codex</div>
+          <div class="terminal-line user">이 프로젝트를 설명하고 실행 방법을 찾아줘. 수정은 하지 마.</div>
+          <div class="terminal-line ok">✓ 파일 구조 확인</div>
+          <div class="terminal-line ok">✓ 테스트/빌드 명령 확인</div>
+          <div class="terminal-line result">다음 단계: 작은 문서 수정부터 시작하세요.</div>
+        </div>
+      </section>
+
+      <section class="quick-map section-block">
+        <div>
+          <span class="stat">25</span>
+          <p>입문부터 확장까지 25개 섹션</p>
+        </div>
+        <div>
+          <span class="stat">4</span>
+          <p>App, IDE, CLI, Cloud 사용 방식</p>
+        </div>
+        <div>
+          <span class="stat">공식</span>
+          <p>OpenAI Codex 문서 기준</p>
+        </div>
+      </section>
+
+      <section class="section-block guide-section" id="00-before" data-title="시작하기 전에">
+        <span class="num">00</span>
+        <h2>시작하기 전에</h2>
+        <p class="summary">처음 목표는 코드를 전부 맡기는 것이 아니라, 안전하게 읽히고 작은 작업부터 검증하는 것입니다.</p>
+        <hr />
+        <h3>이 가이드의 대상</h3>
+        <p>Codex를 한 번도 써본 적 없는 사람입니다. 터미널이 낯설어도 App이나 IDE Extension으로 시작하면 됩니다.</p>
+        <div class="callout">
+          <strong>핵심 관점</strong>
+          <p>Codex는 코딩 답변을 주는 챗봇이 아니라, 프로젝트 폴더를 읽고 파일 수정과 검증까지 도와주는 코딩 에이전트입니다.</p>
+        </div>
+        <ul>
+          <li>처음에는 파일 수정 없이 읽기와 설명부터 시킵니다.</li>
+          <li>작업 전후로 Git 상태를 확인합니다.</li>
+          <li>민감정보, 운영 데이터, 결제, 권한 정책은 신중하게 다룹니다.</li>
+        </ul>
+      </section>
+
+      <section class="section-block guide-section" id="01-what" data-title="Codex란?">
+        <span class="num">01</span>
+        <h2>Codex란?</h2>
+        <p class="summary">Codex는 OpenAI의 소프트웨어 개발용 코딩 에이전트입니다. 코드 작성, 이해, 리뷰, 디버깅, 자동화를 도와줍니다.</p>
+        <hr />
+        <table>
+          <thead>
+            <tr><th>일반 ChatGPT</th><th>Codex</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>대화창에서 답변을 받음</td><td>프로젝트 폴더를 읽고 실제 변경을 제안하거나 수행</td></tr>
+            <tr><td>코드를 붙여넣어 질문</td><td>저장소 구조, 관련 파일, 테스트 명령을 탐색</td></tr>
+            <tr><td>사용자가 결과를 복사해 적용</td><td>diff, 테스트, 리뷰, PR 흐름까지 연결</td></tr>
+          </tbody>
+        </table>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/overview" target="_blank" rel="noreferrer">Codex Overview</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="02-surfaces" data-title="사용 방식">
+        <span class="num">02</span>
+        <h2>Codex를 쓰는 네 가지 방식</h2>
+        <p class="summary">초보자는 App 또는 IDE Extension으로 시작하고, 익숙해지면 CLI와 Cloud로 확장하면 됩니다.</p>
+        <hr />
+        <table>
+          <thead>
+            <tr><th>방식</th><th>지원/환경</th><th>추천 상황</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Codex App</td><td>macOS, Windows</td><td>여러 thread, diff, 터미널, 자동화를 한 화면에서 보고 싶을 때</td></tr>
+            <tr><td>IDE Extension</td><td>VS Code, Cursor, Windsurf, JetBrains 등</td><td>열린 파일과 선택 영역을 바로 컨텍스트로 쓰고 싶을 때</td></tr>
+            <tr><td>CLI</td><td>macOS, Windows, Linux</td><td>터미널 중심 작업, 스크립트, 빠른 로컬 분석</td></tr>
+            <tr><td>Codex Cloud/Web</td><td>chatgpt.com/codex</td><td>GitHub 저장소에서 백그라운드 작업과 PR 생성을 맡길 때</td></tr>
+          </tbody>
+        </table>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/quickstart" target="_blank" rel="noreferrer">Codex Quickstart</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="03-pricing" data-title="요금과 접근">
+        <span class="num">03</span>
+        <h2>요금과 접근</h2>
+        <p class="summary">공식 문서 기준으로 ChatGPT 플랜과 API key 방식으로 Codex를 사용할 수 있습니다. 가격과 한도는 결제 전 다시 확인해야 합니다.</p>
+        <hr />
+        <table>
+          <thead>
+            <tr><th>플랜</th><th>가격</th><th>성격</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Free</td><td>$0/month</td><td>빠른 코딩 작업으로 기능 체험</td></tr>
+            <tr><td>Go</td><td>$8/month</td><td>가벼운 코딩 작업</td></tr>
+            <tr><td>Plus</td><td>$20/month</td><td>주 몇 번의 집중 코딩 세션</td></tr>
+            <tr><td>Pro</td><td>From $100/month</td><td>Plus보다 높은 Codex 사용량</td></tr>
+            <tr><td>API Key</td><td>사용량 기반</td><td>CLI, SDK, IDE, CI 같은 공유 환경 자동화</td></tr>
+          </tbody>
+        </table>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noreferrer">Codex Pricing</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="04-install" data-title="설치와 로그인">
+        <span class="num">04</span>
+        <h2>설치와 로그인</h2>
+        <p class="summary">가장 쉬운 시작은 Codex App입니다. 터미널이 편하다면 CLI를 설치해도 됩니다.</p>
+        <hr />
+        <h3>Codex App</h3>
+        <ol>
+          <li>공식 Quickstart에서 macOS 또는 Windows 앱을 다운로드합니다.</li>
+          <li>앱을 열고 ChatGPT 계정 또는 OpenAI API key로 로그인합니다.</li>
+          <li>작업할 프로젝트 폴더를 선택합니다.</li>
+          <li>처음에는 <code>Local</code>을 선택합니다.</li>
+        </ol>
+        <h3>IDE Extension</h3>
+        <ol>
+          <li>사용하는 에디터에 Codex 확장을 설치합니다.</li>
+          <li>에디터 사이드바에서 Codex 패널을 엽니다.</li>
+          <li>ChatGPT 계정 또는 API key로 로그인합니다.</li>
+        </ol>
+        <h3>CLI</h3>
+        <pre><code>npm install -g @openai/codex</code></pre>
+        <p>macOS Homebrew:</p>
+        <pre><code>brew install codex</code></pre>
+        <p>실행:</p>
+        <pre><code>codex</code></pre>
+      </section>
+
+      <section class="section-block guide-section" id="05-first-run" data-title="첫 실행">
+        <span class="num">05</span>
+        <h2>첫 실행: 만들기 전에 읽히기</h2>
+        <p class="summary">처음부터 수정하지 말고 프로젝트 구조, 실행 명령, 테스트 명령을 먼저 설명하게 합니다.</p>
+        <hr />
+        <pre><code>이 프로젝트를 처음 온 사람 기준으로 설명해줘.
+
+수정하지 말고 다음만 알려줘:
+1. 프로젝트 목적
+2. 주요 폴더
+3. 실행 명령
+4. 테스트 명령
+5. 중요한 설정 파일
+6. 처음 작업할 때 주의할 점</code></pre>
+        <p>이후 다음처럼 이어갑니다.</p>
+        <pre><code>이 내용을 바탕으로 AGENTS.md 초안을 만들어줘.
+아직 파일은 만들지 말고 먼저 초안만 보여줘.</code></pre>
+      </section>
+
+      <section class="section-block guide-section" id="06-prompting" data-title="프롬프트 기본기">
+        <span class="num">06</span>
+        <h2>프롬프트 기본기</h2>
+        <p class="summary">Codex 프롬프트는 목표, 맥락, 제약, 완료 기준 네 가지로 쓰면 안정적입니다.</p>
+        <hr />
+        <pre><code>목표:
+- 무엇을 바꾸거나 만들고 싶은지
+
+맥락:
+- 관련 파일, 폴더, 에러 메시지, 화면, 재현 방법
+
+제약:
+- 바꾸면 안 되는 것
+- 새 의존성 추가 여부
+- 스타일이나 아키텍처 규칙
+
+완료 기준:
+- 테스트 통과
+- 특정 동작 확인
+- 문서 업데이트</code></pre>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/prompting" target="_blank" rel="noreferrer">Prompting Codex</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="07-practice" data-title="첫 실습">
+        <span class="num">07</span>
+        <h2>첫 실습 3개</h2>
+        <p class="summary">읽기, 작은 문서 수정, 재현 가능한 버그 수정 순서로 시작합니다.</p>
+        <hr />
+        <div class="cards">
+          <article>
+            <h3>프로젝트 설명</h3>
+            <p>수정 없이 구조와 실행 명령을 파악합니다.</p>
+            <pre><code>이 프로젝트를 초보자 기준으로 설명해줘. 수정하지 마.</code></pre>
+          </article>
+          <article>
+            <h3>문서 수정</h3>
+            <p>README처럼 되돌리기 쉬운 문서부터 수정합니다.</p>
+            <pre><code>README.md의 실행 방법을 현재 설정 파일 기준으로 업데이트해줘.</code></pre>
+          </article>
+          <article>
+            <h3>버그 수정</h3>
+            <p>재현 방법을 주고 최소 수정과 검증을 요구합니다.</p>
+            <pre><code>아래 재현 방법으로 버그를 확인하고 최소 수정으로 고쳐줘.</code></pre>
+          </article>
+        </div>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/workflows" target="_blank" rel="noreferrer">Codex Workflows</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="08-plan" data-title="Plan Mode">
+        <span class="num">08</span>
+        <h2>Plan Mode</h2>
+        <p class="summary">여러 파일, 인증, 결제, 마이그레이션, 큰 리팩터링은 바로 구현하지 말고 계획부터 세웁니다.</p>
+        <hr />
+        <pre><code>/plan 이 인증 로직을 OAuth2 방식으로 바꾸는 계획을 세워줘. 구현은 아직 하지 마.</code></pre>
+        <pre><code>먼저 계획만 세워줘.
+
+목표:
+회원가입 플로우에 이메일 인증 단계를 추가하고 싶어.
+
+산출물:
+- 단계별 계획
+- 수정 예상 파일
+- 리스크
+- 내가 먼저 결정해야 할 질문
+
+아직 파일 수정은 하지 마.</code></pre>
+      </section>
+
+      <section class="section-block guide-section" id="09-agents" data-title="AGENTS.md">
+        <span class="num">09</span>
+        <h2>AGENTS.md</h2>
+        <p class="summary">AGENTS.md는 Codex가 매번 읽는 작업 지침서입니다. 실행 명령, 테스트, 금지사항, 완료 기준을 저장합니다.</p>
+        <hr />
+        <pre><code># AGENTS.md
+
+## 실행 명령
+- 개발 서버: `npm run dev`
+- 테스트: `npm test`
+- 빌드: `npm run build`
+
+## 작업 규칙
+- 새 의존성 추가 전 사용자에게 확인합니다.
+- 대규모 리팩터링은 먼저 계획을 제시합니다.
+- 민감정보는 출력하거나 커밋하지 않습니다.
+
+## 완료 기준
+- 관련 테스트를 실행합니다.
+- 변경 파일과 검증 결과를 요약합니다.</code></pre>
+        <p>CLI에서는 <code>/init</code>으로 초안을 만들 수 있습니다.</p>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/guides/agents-md" target="_blank" rel="noreferrer">Custom instructions with AGENTS.md</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="10-permissions" data-title="권한과 샌드박스">
+        <span class="num">10</span>
+        <h2>권한과 샌드박스</h2>
+        <p class="summary">Codex는 파일과 명령어를 다루므로 sandbox mode와 approval policy를 이해해야 합니다.</p>
+        <hr />
+        <table>
+          <thead>
+            <tr><th>모드</th><th>설명</th><th>초보자 추천</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Read-only</td><td>읽기 중심. 수정과 명령 실행은 제한</td><td>처음 분석할 때</td></tr>
+            <tr><td>Auto / workspace-write</td><td>작업 폴더 안에서 읽기, 수정, 명령 실행 가능</td><td>일반 작업</td></tr>
+            <tr><td>Full Access</td><td>넓은 접근과 네트워크를 허용</td><td>신뢰된 환경에서만</td></tr>
+          </tbody>
+        </table>
+        <pre><code>/permissions</code></pre>
+        <div class="callout warning">
+          <strong>주의</strong>
+          <p>Full Access는 편하지만 위험합니다. 초보자는 기본 권한 또는 Read-only에서 시작하세요.</p>
+        </div>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/agent-approvals-security" target="_blank" rel="noreferrer">Agent approvals & security</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="11-cli" data-title="CLI 명령어">
+        <span class="num">11</span>
+        <h2>CLI 명령어</h2>
+        <p class="summary">CLI는 터미널에서 Codex를 실행하는 방식입니다. 자동화와 빠른 로컬 작업에 좋습니다.</p>
+        <hr />
+        <table>
+          <tbody>
+            <tr><td><code>codex</code></td><td>대화형 터미널 UI 실행</td></tr>
+            <tr><td><code>codex "질문"</code></td><td>한 번 묻고 종료</td></tr>
+            <tr><td><code>codex resume</code></td><td>이전 세션 이어서 열기</td></tr>
+            <tr><td><code>codex --version</code></td><td>버전 확인</td></tr>
+            <tr><td><code>codex update</code></td><td>지원되는 경우 CLI 업데이트</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <tbody>
+            <tr><td><code>/status</code></td><td>현재 모델, 권한, 작업 경로 확인</td></tr>
+            <tr><td><code>/diff</code></td><td>변경사항 확인</td></tr>
+            <tr><td><code>/review</code></td><td>작업 트리 코드 리뷰</td></tr>
+            <tr><td><code>/compact</code></td><td>긴 대화 요약</td></tr>
+            <tr><td><code>/mention</code></td><td>특정 파일 첨부</td></tr>
+            <tr><td><code>/mcp</code></td><td>연결된 MCP 도구 확인</td></tr>
+          </tbody>
+        </table>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/cli/slash-commands" target="_blank" rel="noreferrer">Slash commands in Codex CLI</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="12-models" data-title="모델 선택">
+        <span class="num">12</span>
+        <h2>모델과 reasoning 선택</h2>
+        <p class="summary">2026-05-25 기준 공식 문서에서 Codex의 일반적인 권장 모델은 gpt-5.5입니다.</p>
+        <hr />
+        <table>
+          <tbody>
+            <tr><td><code>gpt-5.5</code></td><td>복잡한 코딩, 계획, 디버깅, 도구 사용의 기본 선택</td></tr>
+            <tr><td><code>gpt-5.4</code></td><td>일반 로컬 작업에서 사용량을 아끼고 싶을 때</td></tr>
+            <tr><td><code>gpt-5.4-mini</code></td><td>간단하고 반복적인 로컬 메시지</td></tr>
+            <tr><td><code>gpt-5.3-Codex</code></td><td>Codex 특화 작업, Cloud task와 GitHub code review 영역</td></tr>
+          </tbody>
+        </table>
+        <p>reasoning은 작은 작업은 <code>low</code>, 일반 작업은 <code>medium</code>, 복잡한 디버깅은 <code>high</code>부터 시작합니다.</p>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/api/docs/guides/latest-model.md" target="_blank" rel="noreferrer">Using GPT-5.5</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="13-git" data-title="Git 워크플로우">
+        <span class="num">13</span>
+        <h2>Git과 함께 쓰기</h2>
+        <p class="summary">Codex는 Git과 함께 쓸 때 안전합니다. 작업 전후 상태를 확인하고 작은 단위로 검토하세요.</p>
+        <hr />
+        <pre><code>git status</code></pre>
+        <pre><code>git diff</code></pre>
+        <pre><code>현재 변경사항을 리뷰해줘.
+우선순위는 버그, 보안, 테스트 누락, 유지보수성 순서로 봐줘.</code></pre>
+      </section>
+
+      <section class="section-block guide-section" id="14-cloud" data-title="Codex Cloud">
+        <span class="num">14</span>
+        <h2>Codex Cloud</h2>
+        <p class="summary">Codex Cloud는 OpenAI 관리 환경에서 GitHub 저장소를 클론해 백그라운드로 작업하는 방식입니다.</p>
+        <hr />
+        <ol>
+          <li><a href="https://chatgpt.com/codex" target="_blank" rel="noreferrer">chatgpt.com/codex</a>에 접속합니다.</li>
+          <li>GitHub 계정을 연결합니다.</li>
+          <li>저장소 환경을 설정합니다.</li>
+          <li>작업 프롬프트를 입력합니다.</li>
+          <li>로그와 diff를 확인합니다.</li>
+          <li>PR을 만들거나 로컬에서 checkout해 테스트합니다.</li>
+        </ol>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/cloud" target="_blank" rel="noreferrer">Codex web</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="15-github" data-title="GitHub 리뷰">
+        <span class="num">15</span>
+        <h2>GitHub PR에서 Codex 리뷰 받기</h2>
+        <p class="summary">Codex code review를 켜면 PR 댓글에서 Codex에게 리뷰나 수정 작업을 요청할 수 있습니다.</p>
+        <hr />
+        <pre><code>@codex review</code></pre>
+        <pre><code>@codex review for security regressions</code></pre>
+        <pre><code>@codex fix the P1 issue</code></pre>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/integrations/github" target="_blank" rel="noreferrer">Codex code review in GitHub</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="16-mcp" data-title="MCP">
+        <span class="num">16</span>
+        <h2>MCP</h2>
+        <p class="summary">MCP(Model Context Protocol)는 Codex가 외부 도구와 컨텍스트에 연결되는 표준입니다.</p>
+        <hr />
+        <div class="cards">
+          <article><h3>문서</h3><p>OpenAI Docs, Context7 같은 최신 문서 검색</p></article>
+          <article><h3>디자인</h3><p>Figma 디자인 읽기</p></article>
+          <article><h3>브라우저</h3><p>Playwright나 Chrome DevTools로 화면 검사</p></article>
+        </div>
+        <pre><code>/mcp</code></pre>
+        <pre><code>codex mcp add context7 -- npx -y @upstash/context7-mcp</code></pre>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/mcp" target="_blank" rel="noreferrer">Model Context Protocol</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="17-skills" data-title="Skills">
+        <span class="num">17</span>
+        <h2>Skills</h2>
+        <p class="summary">Skill은 반복되는 작업 방식을 SKILL.md로 포장한 것입니다. Codex가 같은 절차를 안정적으로 따르게 합니다.</p>
+        <hr />
+        <pre><code>my-skill/
+├── SKILL.md
+├── scripts/
+├── references/
+└── assets/</code></pre>
+        <ul>
+          <li>같은 프롬프트를 반복해서 쓸 때</li>
+          <li>Codex가 같은 실수를 두 번 했을 때</li>
+          <li>팀 공통 리뷰 기준이나 릴리스 절차가 있을 때</li>
+        </ul>
+        <pre><code>$skill-creator</code></pre>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/skills" target="_blank" rel="noreferrer">Agent Skills</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="18-automations" data-title="자동화">
+        <span class="num">18</span>
+        <h2>자동화</h2>
+        <p class="summary">Codex App에서는 반복 작업을 일정에 맞춰 백그라운드로 실행할 수 있습니다.</p>
+        <hr />
+        <ul>
+          <li>매일 최근 커밋 요약</li>
+          <li>주기적 버그 가능성 스캔</li>
+          <li>릴리스 노트 초안</li>
+          <li>CI 실패 확인</li>
+          <li>PR 상태 점검</li>
+        </ul>
+        <div class="callout">
+          <strong>순서</strong>
+          <p>먼저 수동 프롬프트를 안정화하고, 반복 방법은 Skill로 만든 뒤, 스케줄은 Automation으로 넘기세요.</p>
+        </div>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/app/automations" target="_blank" rel="noreferrer">Automations</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="19-windows" data-title="Windows">
+        <span class="num">19</span>
+        <h2>Windows에서 쓰기</h2>
+        <p class="summary">Windows에서는 native Windows 방식과 WSL2 방식이 있습니다. 일반 사용자는 App 또는 IDE Extension부터 시작하면 됩니다.</p>
+        <hr />
+        <table>
+          <tbody>
+            <tr><td>Native Windows</td><td>Windows에서 Codex App, CLI, IDE Extension 사용</td></tr>
+            <tr><td>Elevated sandbox</td><td>권장되는 강한 네이티브 Windows 샌드박스</td></tr>
+            <tr><td>Unelevated sandbox</td><td>elevated 설정이 막힌 환경의 fallback</td></tr>
+            <tr><td>WSL2</td><td>Linux 네이티브 개발환경이 필요할 때</td></tr>
+          </tbody>
+        </table>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/windows" target="_blank" rel="noreferrer">Codex on Windows</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="20-trouble" data-title="문제 해결">
+        <span class="num">20</span>
+        <h2>문제 해결</h2>
+        <p class="summary">막히면 현재 폴더, 권한, 네트워크, Git 상태를 먼저 확인합니다.</p>
+        <hr />
+        <pre><code>지금은 읽기만 해줘. 파일 수정, 명령 실행, 의존성 설치는 하지 마.</code></pre>
+        <pre><code>방금 명령이 왜 실패했는지 설명해줘.
+환경 문제인지, 의존성 문제인지, 권한 문제인지 구분해줘.
+수정 전에 계획만 알려줘.</code></pre>
+        <p class="source-line">공식 기준: <a href="https://developers.openai.com/codex/app/troubleshooting" target="_blank" rel="noreferrer">Codex App Troubleshooting</a></p>
+      </section>
+
+      <section class="section-block guide-section" id="21-mistakes" data-title="흔한 실수">
+        <span class="num">21</span>
+        <h2>흔한 실수</h2>
+        <p class="summary">대부분의 실패는 범위와 완료 기준을 주지 않았기 때문에 생깁니다.</p>
+        <hr />
+        <table>
+          <thead><tr><th>실수</th><th>대신 이렇게</th></tr></thead>
+          <tbody>
+            <tr><td>이 서비스 전체 개선해줘</td><td>인증 흐름만 분석해줘. 수정하지 마.</td></tr>
+            <tr><td>재현 방법 없이 버그 맡기기</td><td>화면, 기대 결과, 실제 결과, 에러 메시지 제공</td></tr>
+            <tr><td>권한을 너무 빨리 넓히기</td><td>Read-only나 기본 권한에서 시작</td></tr>
+            <tr><td>테스트 실패 무시</td><td>검증 명령과 결과를 항상 요구</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section-block guide-section" id="22-security" data-title="보안 수칙">
+        <span class="num">22</span>
+        <h2>보안 수칙</h2>
+        <p class="summary">Codex는 강력한 도구입니다. 민감정보와 운영 데이터는 초보 단계부터 엄격히 다뤄야 합니다.</p>
+        <hr />
+        <ul>
+          <li>API key, token, password, private key를 대화에 직접 붙여넣지 않습니다.</li>
+          <li><code>.env</code> 값을 문서나 로그에 남기지 않습니다.</li>
+          <li>이해하지 못한 설치 스크립트 실행을 승인하지 않습니다.</li>
+          <li>운영 DB, 결제, 고객 데이터 수정 요청은 사전 승인 없이는 하지 않습니다.</li>
+          <li>Full Access를 습관적으로 사용하지 않습니다.</li>
+        </ul>
+        <pre><code>이 작업 중 민감정보가 발견되면 원문을 출력하지 말고 ***REDACTED***로만 표시해줘.
+API key, token, password, cookie, private key는 코드나 문서에 남기지 마.</code></pre>
+      </section>
+
+      <section class="section-block guide-section" id="23-routine" data-title="첫날 루틴">
+        <span class="num">23</span>
+        <h2>첫날 추천 루틴</h2>
+        <p class="summary">첫날은 읽기, 작은 수정, 리뷰, 지침화만 해도 충분합니다.</p>
+        <hr />
+        <ol>
+          <li>Codex App 또는 IDE Extension 설치</li>
+          <li>프로젝트 폴더 열기</li>
+          <li>Read-only 성격의 분석 요청</li>
+          <li>실행/테스트 명령 확인</li>
+          <li>작은 문서 수정 요청</li>
+          <li>diff 확인</li>
+          <li><code>/review</code> 또는 리뷰 요청</li>
+          <li>AGENTS.md 초안 작성</li>
+        </ol>
+      </section>
+
+      <section class="section-block guide-section" id="24-sources" data-title="공식 출처">
+        <span class="num">24</span>
+        <h2>공식 출처</h2>
+        <p class="summary">이 웹 가이드는 2026-05-25 기준 OpenAI 공식 문서만 근거로 작성했습니다.</p>
+        <hr />
+        <ul class="source-list">
+          <li><a href="https://developers.openai.com/codex/overview" target="_blank" rel="noreferrer">Codex Overview</a></li>
+          <li><a href="https://developers.openai.com/codex/quickstart" target="_blank" rel="noreferrer">Codex Quickstart</a></li>
+          <li><a href="https://developers.openai.com/codex/app" target="_blank" rel="noreferrer">Codex App</a></li>
+          <li><a href="https://developers.openai.com/codex/ide" target="_blank" rel="noreferrer">Codex IDE Extension</a></li>
+          <li><a href="https://developers.openai.com/codex/cli" target="_blank" rel="noreferrer">Codex CLI</a></li>
+          <li><a href="https://developers.openai.com/codex/cloud" target="_blank" rel="noreferrer">Codex Web/Cloud</a></li>
+          <li><a href="https://developers.openai.com/codex/pricing" target="_blank" rel="noreferrer">Codex Pricing</a></li>
+          <li><a href="https://developers.openai.com/codex/learn/best-practices" target="_blank" rel="noreferrer">Best Practices</a></li>
+          <li><a href="https://developers.openai.com/codex/prompting" target="_blank" rel="noreferrer">Prompting</a></li>
+          <li><a href="https://developers.openai.com/codex/workflows" target="_blank" rel="noreferrer">Workflows</a></li>
+          <li><a href="https://developers.openai.com/codex/guides/agents-md" target="_blank" rel="noreferrer">AGENTS.md Guide</a></li>
+          <li><a href="https://developers.openai.com/codex/agent-approvals-security" target="_blank" rel="noreferrer">Agent Approvals & Security</a></li>
+          <li><a href="https://developers.openai.com/codex/cli/slash-commands" target="_blank" rel="noreferrer">CLI Slash Commands</a></li>
+          <li><a href="https://developers.openai.com/codex/windows" target="_blank" rel="noreferrer">Windows Guide</a></li>
+          <li><a href="https://developers.openai.com/codex/mcp" target="_blank" rel="noreferrer">MCP</a></li>
+          <li><a href="https://developers.openai.com/codex/skills" target="_blank" rel="noreferrer">Skills</a></li>
+          <li><a href="https://developers.openai.com/codex/app/automations" target="_blank" rel="noreferrer">Automations</a></li>
+          <li><a href="https://developers.openai.com/codex/integrations/github" target="_blank" rel="noreferrer">GitHub Code Review</a></li>
+          <li><a href="https://developers.openai.com/api/docs/guides/latest-model.md" target="_blank" rel="noreferrer">Latest Model Guide</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <button class="back-top" id="backTop" type="button" aria-label="맨 위로 이동">↑</button>
+    <script src="./script.js"></script>
+  </body>
+</html>
