@@ -287,13 +287,11 @@ a:hover {
   padding-left: 12px;
 }
 
-.gz-sign {
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: 500;
-  letter-spacing: .3px;
-  white-space: nowrap;
-  opacity: .7;
+.gz-logo {
+  height: 28px;
+  width: auto;
+  opacity: .85;
+  flex-shrink: 0;
 }
 
 .top-actions {
