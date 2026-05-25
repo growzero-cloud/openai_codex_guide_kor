@@ -294,6 +294,24 @@ a:hover {
   flex-shrink: 0;
 }
 
+.gz-byline {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 10px 0 16px;
+}
+.gz-byline img {
+  height: 22px;
+  width: auto;
+  opacity: .9;
+}
+.gz-byline span {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: .2px;
+}
+
 .top-actions {
   display: flex;
   align-items: center;
