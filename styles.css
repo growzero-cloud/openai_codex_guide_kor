@@ -1291,3 +1291,35 @@ pre:hover .copy-code,
     font-size: 13px;
   }
 }
+
+/* Tab Group */
+.tab-group { margin: 0; }
+.tab-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.tab-btn {
+  background: var(--surface, #1e1e2e);
+  border: 1.5px solid var(--line, rgba(255,255,255,0.1));
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--text-secondary, rgba(255,255,255,0.6));
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.tab-btn:hover { border-color: var(--accent, hsl(24,100%,60%)); color: var(--text, #fff); }
+.tab-btn.active {
+  background: var(--accent-gradient, linear-gradient(135deg, hsl(24,100%,60%) 0%, hsl(295,85%,60%) 100%));
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+.rec-badge {
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
